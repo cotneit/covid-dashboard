@@ -1,6 +1,6 @@
 import getData from '@modules/api'
 
-function init(data){
+function init(data) {
     console.log(data);
 }
 
