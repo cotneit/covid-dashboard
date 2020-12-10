@@ -1,7 +1,7 @@
-import getData from '@modules/api'
+import getData from './modules/api';
 
 function init(data) {
-    console.log(data);
+  console.log(data);
 }
 
-getData('summary').then(data => init(data));
+getData('summary').then((data) => init(data));

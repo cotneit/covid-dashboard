@@ -4,12 +4,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  resolve: {
-    extensions: ['.js'],
-    alias: {
-      '@modules': path.resolve(__dirname, 'src/modules'),
-    }
-  },
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
