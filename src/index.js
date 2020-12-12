@@ -1,7 +1,9 @@
+import './styles/style.css';
 import getData from './modules/api';
+import map from './modules/map';
 
 function init(data) {
-  console.log(data);
+  map(data);
 }
 
-getData('summary').then((data) => init(data));
+getData().then((data) => init(data));
