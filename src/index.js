@@ -1,6 +1,6 @@
-import './styles/style.css';
 import getData from './modules/api';
 import map from './modules/map';
+import './styles/style.css';
 
 function init(data) {
   map(data);

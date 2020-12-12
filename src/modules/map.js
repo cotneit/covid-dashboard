@@ -1,8 +1,9 @@
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet/dist/leaflet';
 // Источник: https://www.freecodecamp.org/news/how-to-create-a-coronavirus-covid-19-dashboard-map-app-in-react-with-gatsby-and-leaflet/
 
 export default function map(data) {
   let casesString;
-  const { L } = window;
 
   const geoJson = {
     type: 'FeatureCollection',
