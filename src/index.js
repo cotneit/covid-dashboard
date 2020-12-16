@@ -5,8 +5,7 @@ import State from './modules/state';
 import './styles/style.css';
 
 function init(data) {
-  console.log(data);
-  const state = new State(data, 'USA', 'All');
+  const state = new State(data, 'Belarus', 'All');
 
   state.subscribe((json, country, type) => {
     countriesTable(json, country, type);
@@ -15,8 +14,6 @@ function init(data) {
   state.subscribe((json, country, type) => {
     map(json, country, type);
   });
-
-  state.update(data, 'Belarus', 'All');
 }
 
 getData().then((data) => init(data));

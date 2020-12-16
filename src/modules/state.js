@@ -18,8 +18,7 @@ export default class State {
   }
 
   unsubscribe(fn) {
-    if (this.subscribers.has(fn)) this.delete(fn);
-    // this.subscribers = this.subscribers.filter((subscriber) => subscriber !== fn);
+    if (this.subscribers.has(fn)) this.subscribers.delete(fn);
   }
 
   update(data, country, type) {

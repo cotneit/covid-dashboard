@@ -1,18 +1,30 @@
 import map from './map';
 
-const getSort = ({ target }) => {
-  const order = (target.dataset.order = -(target.dataset.order || -1));
-  const index = [...target.parentNode.cells].indexOf(target);
+// Источник: https://codepen.io/dcode-software/pen/zYGOrzK
+
+function sortTableByColumn(table, column, asc = true) {
+  const dirModifier = asc ? 1 : -1;
+  const tBody = table.tBodies[0];
+  const rows = Array.from(tBody.querySelectorAll('tr'));
+
   const collator = new Intl.Collator(['en', 'ru'], { numeric: true });
   const comparator = (index, order) => (a, b) => order * collator.compare(
     a.children[index].innerHTML,
     b.children[index].innerHTML,
   );
 
-  for (const tBody of target.closest('table').tBodies) tBody.append(...[...tBody.rows].sort(comparator(index, order)));
+  const sortedRows = rows.sort(comparator(column, dirModifier));
 
-  for (const cell of target.parentNode.cells) cell.classList.toggle('sorted', cell === target);
-};
+  while (tBody.firstChild) {
+    tBody.removeChild(tBody.firstChild);
+  }
+
+  tBody.append(...sortedRows);
+
+  table.querySelectorAll('th').forEach((th) => th.classList.remove('th-sort-asc', 'th-sort-desc'));
+  table.querySelector(`th:nth-child(${column + 1})`).classList.toggle('th-sort-asc', asc);
+  table.querySelector(`th:nth-child(${column + 1})`).classList.toggle('th-sort-desc', !asc);
+}
 
 export default function countriesTable(data, country, type) {
   document.querySelector('#country').innerHTML = '';
@@ -39,5 +51,13 @@ export default function countriesTable(data, country, type) {
 
   document.querySelector('#country').appendChild(divTable);
 
-  document.querySelectorAll('.country_sort thead').forEach((tableTH) => tableTH.addEventListener('click', (event) => getSort(event)));
+  document.querySelectorAll('.country_sort th').forEach((headerCell) => {
+    headerCell.addEventListener('click', () => {
+      const tableElement = headerCell.parentElement.parentElement.parentElement;
+      const headIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+      const currentIsAscending = headerCell.classList.contains('th-sort-asc');
+
+      sortTableByColumn(tableElement, headIndex, !currentIsAscending);
+    });
+  });
 }

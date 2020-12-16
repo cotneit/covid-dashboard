@@ -57,16 +57,16 @@ ul {
     cursor: default;
     position: relative;
     border-collapse: collapse;
-  }
+}
   
-  #country tr {
+#country tr {
     text-align: center;
     color: white;
     line-height: 2rem;
     text-transform: capitalize;
-  }
-  
-  #country th {
+}
+
+#country th {
     color: #f7ffff;
     background: #517d67;
     font-size: 1rem;
@@ -75,41 +75,35 @@ ul {
     cursor: pointer;
     top: 0;
     width: 50px;
-  }
-  
-  #country tr td:nth-child(1), #country tr td:nth-child(2), #country tr td:nth-child(3) {
+}
+
+#country tr td:nth-child(1), #country tr td:nth-child(2), #country tr td:nth-child(3) {
     text-align: left;
     padding-left: 10px;
-  }
-  
-  #country tr td {
+}
+
+#country tr td {
     filter: drop-shadow(black 1px 1px 1px);
-  }
+}
 
-  .country-table {
+.country-table {
     width: 100%;
-  }
-
-th.sorted[data-order="1"],
-th.sorted[data-order="-1"] {
-  position: relative;
 }
 
-th.sorted[data-order="1"]::after,
-th.sorted[data-order="-1"]::after {
-  right: 8px;
-  position: absolute;
+.country-table .th-sort-asc::after {
+    content: "\25b4";
 }
 
-th.sorted[data-order="-1"]::after {
-content: "▼"
+.country-table .th-sort-desc::after {
+    content: "\25be";
 }
 
-th.sorted[data-order="1"]::after {
-content: "▲"
+.country-table .th-sort-asc::after,
+.country-table .th-sort-desc::after {
+    margin-left: 5px;
 }
 
 #country tr:hover {
-    background-color: green;
-    cursor: pointer;
+  cursor: pointer;
+  background: green;
 }
