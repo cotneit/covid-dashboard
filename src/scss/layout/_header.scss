@@ -1,0 +1,35 @@
+.header {
+  @include section;
+
+  box-sizing: border-box;
+  min-height: 100px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  &__heading {
+    margin: 0;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    color: $white;
+  }
+
+  &__info {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    font-family: 'Roboto';
+    font-weight: 400;
+    color: $white;
+  }
+
+  &__last-updated {
+    margin: 0;
+  }
+}
