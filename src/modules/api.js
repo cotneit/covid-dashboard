@@ -3,17 +3,11 @@
 export default async function getData(type) {
   let response;
   switch (type) {
-    case 'Summary':
-      response = await fetch('https://api.covid19api.com/summary');
-      break;
-    case 'Country':
-      response = await fetch('https://api.covid19api.com/countries');
-      break;
     case 'World':
-      response = await fetch('https://api.covid19api.com/world/total');
+      response = await fetch('https://disease.sh/v3/covid-19/all');
       break;
     default:
-      response = await fetch('https://corona.lmao.ninja/v2/countries');
+      response = await fetch('https://disease.sh/v3/covid-19/countries');
       break;
   }
   const data = await response.json();
