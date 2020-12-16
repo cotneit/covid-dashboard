@@ -1,9 +1,12 @@
+.main {
+    display: flex;
+    justify-content: space-between;
+}
+
 #map {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    width: 50%;
+    height: 500px;
+    position: relative;
 }
 
 .icon-marker {
@@ -12,7 +15,7 @@
     align-items: center;
     color: white;
     font-weight: bold;
-    background-color: red;
+    background-color: #ff0000ad;
     border-radius: 100%;
     box-shadow: 0 2px 5px rgb(0, 0, 0, 0.3);
 }
@@ -39,4 +42,74 @@ ul {
     list-style: none;
     padding: 0;
     margin: 0.6em 0 0;
+}
+
+/* Table */
+
+.table-overflow{
+    overflow-y: scroll;
+    height: 500px;
+}
+
+#country {
+    width: 50%;
+    background: rgb(147, 197, 75);
+    cursor: default;
+    position: relative;
+    border-collapse: collapse;
+  }
+  
+  #country tr {
+    text-align: center;
+    color: white;
+    line-height: 2rem;
+    text-transform: capitalize;
+  }
+  
+  #country th {
+    color: #f7ffff;
+    background: #517d67;
+    font-size: 1rem;
+    font-weight: lighter;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    top: 0;
+    width: 50px;
+  }
+  
+  #country tr td:nth-child(1), #country tr td:nth-child(2), #country tr td:nth-child(3) {
+    text-align: left;
+    padding-left: 10px;
+  }
+  
+  #country tr td {
+    filter: drop-shadow(black 1px 1px 1px);
+  }
+
+  .country-table {
+    width: 100%;
+  }
+
+th.sorted[data-order="1"],
+th.sorted[data-order="-1"] {
+  position: relative;
+}
+
+th.sorted[data-order="1"]::after,
+th.sorted[data-order="-1"]::after {
+  right: 8px;
+  position: absolute;
+}
+
+th.sorted[data-order="-1"]::after {
+content: "▼"
+}
+
+th.sorted[data-order="1"]::after {
+content: "▲"
+}
+
+#country tr:hover {
+    background-color: green;
+    cursor: pointer;
 }
