@@ -3,8 +3,7 @@ import L from 'leaflet/dist/leaflet';
 
 // Источник: https://www.freecodecamp.org/news/how-to-create-a-coronavirus-covid-19-dashboard-map-app-in-react-with-gatsby-and-leaflet/
 
-let maps; let
-  marker;
+let maps, marker;
 
 function getSize(d) {
   if (d > 7) return [57, 57];
@@ -48,7 +47,7 @@ export default function map(data, oneCountry, type) {
 
   maps = L.map('map').setView(latlong, 7);
   L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`, {
-    id: 'mapbox/light-v9',
+    id: 'mapbox/dark-v10',
     tileSize: 512,
     zoomOffset: -1,
   }).addTo(maps);

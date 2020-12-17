@@ -1,0 +1,71 @@
+.country-table {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  position: relative;
+
+  background: #2f2f33;
+  font-family: 'Roboto', sans-serif;
+  
+  &__inner {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  &__row {
+    text-align: center;
+    color: white;
+    line-height: 2rem;
+    text-transform: capitalize;
+    border-bottom: 1px solid #aba3a31c;
+
+    &:hover {
+      cursor: pointer;
+      background: #1d1b1b;
+    }
+
+    &--header {
+      border-bottom: none;
+    }
+  }
+
+  & th {
+    position: sticky;
+    top: 0;
+    width: 50px;
+    z-index: 1;
+    background: #517d67;
+    cursor: pointer;
+    color: #f7ffff;
+    font-size: 1rem;
+    line-height: 2rem;
+    font-weight: lighter;
+    letter-spacing: 0.05em;
+
+    &::after {
+      content: "";
+      margin-left: 2px;
+      display: inline-block;
+      width: 1px;
+      height: 1px;
+      transform: translateY(100%);
+    }
+  }
+
+  & td {
+    filter: drop-shadow(black 1px 1px 1px);
+
+    &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+      text-align: left;
+      padding-left: 10px;
+    }
+  }
+
+  & .th-sort-asc::after {
+    content: "\25b4";
+  }
+
+  & .th-sort-desc::after {
+    content: "\25be";
+  }
+}
