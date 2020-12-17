@@ -29,17 +29,18 @@ function sortTableByColumn(table, column, asc = true) {
 export default function countriesTable(data, country, type) {
   document.querySelector('#country').innerHTML = '';
   const divTable = document.createElement('div');
-  divTable.className = 'table-overflow';
+  divTable.className = 'country-table';
 
   const table = document.createElement('table');
-  table.className = 'country-table country_sort';
+  table.className = 'country-table__inner country_sort';
 
   const thead = document.createElement('thead');
-  thead.innerHTML = '<tr><th>Country</th><th>Cases</th><th>Deaths</th><th>Recovered</th></tr>';
+  thead.innerHTML = '<tr class="country-table__row country-table__row--header"><th>Country</th><th>Cases</th><th>Deaths</th><th>Recovered</th></tr>';
   const tbody = document.createElement('tbody');
 
   data.forEach((elem) => {
     const tr = document.createElement('tr');
+    tr.className = 'country-table__row';
     tr.innerHTML = `<tr><td>${elem.country}</td><td>${elem.cases}</td><td>${elem.deaths}</td><td>${elem.recovered}</td></tr>`;
     tr.addEventListener('click', () => map(data, elem.country, type));
     tbody.appendChild(tr);

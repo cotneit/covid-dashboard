@@ -1,0 +1,11 @@
+.icon-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  background-color: $red-prim;
+  opacity: 0.95;
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgb(0, 0, 0, 0.3);
+}

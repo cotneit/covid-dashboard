@@ -2,7 +2,7 @@ import getData from './modules/api';
 import map from './modules/map';
 import countriesTable from './modules/countries';
 import State from './modules/state';
-import './styles/style.css';
+import './scss/main.scss';
 
 function init(data) {
   const state = new State(data, 'Belarus', 'All');
