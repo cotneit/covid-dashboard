@@ -18,27 +18,27 @@ async function getChartData(selectedCountry, status) {
 const getChartColors = (status, type) => {
   if (type === 'background') {
     if (status === 'Confirmed') {
-      return ['rgba(255, 99, 132, 0.2)'];
+      return ['#c8354e'];
     }
     if (status === 'Recovered') {
-      return ['rgba(91, 184, 52, 0.2)'];
+      return ['#33b349'];
     }
     if (status === 'Deaths') {
-      return ['rgba(118, 128, 144, 0.2)'];
+      return ['#eeeeee'];
     }
   }
   if (type === 'border') {
     if (status === 'Confirmed') {
-      return ['rgba(255, 99, 132, 1)'];
+      return ['#902039'];
     }
     if (status === 'Recovered') {
-      return ['rgba(91, 184, 52, 1)'];
+      return ['#278040'];
     }
     if (status === 'Deaths') {
-      return ['rgba(118, 128, 144, 1)'];
+      return ['#eeeeee'];
     }
   }
-  return '';
+  return '#eeeeee';
 };
 
 export default function newChart(data, country, type) {
