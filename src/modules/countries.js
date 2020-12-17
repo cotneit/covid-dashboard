@@ -1,4 +1,5 @@
 import map from './map';
+import newChart from './covid-chart';
 
 // Источник: https://codepen.io/dcode-software/pen/zYGOrzK
 
@@ -42,7 +43,10 @@ export default function countriesTable(data, country, type) {
     const tr = document.createElement('tr');
     tr.className = 'country-table__row';
     tr.innerHTML = `<tr><td>${elem.country}</td><td>${elem.cases}</td><td>${elem.deaths}</td><td>${elem.recovered}</td></tr>`;
-    tr.addEventListener('click', () => map(data, elem.country, type));
+    tr.addEventListener('click', () => {
+      map(data, elem.country, type);
+      newChart(data, elem.country, type);
+    });
     tbody.appendChild(tr);
   });
 
