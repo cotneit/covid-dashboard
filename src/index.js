@@ -15,7 +15,7 @@ function init(data) {
   state.subscribe((json, country, type) => {
     map(json, country, type);
   });
-    
+
   state.subscribe((json, country, type) => {
     newChart(json, country, type);
   });
