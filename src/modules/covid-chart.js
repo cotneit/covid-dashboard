@@ -1,74 +1,68 @@
 import Chart from 'chart.js/dist/Chart.bundle.min';
+import getData from './api';
 
 /**
  * Источник: https://medium.com/swlh/create-a-covid-19-dashboard-with-javascript-373f46a11fcc
  */
 let chart = null;
 
-async function getChartData(selectedCountry, status) {
-  let url = `https://api.covid19api.com/total/country/${selectedCountry}`;
-  if (status !== 'All') {
-    url = `${url}/status/${status}`;
-  }
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
-}
-
 const getChartColors = (status, type) => {
   if (type === 'background') {
-    if (status === 'Confirmed') {
+    if (status === 'cases') {
       return ['#c8354e'];
     }
-    if (status === 'Recovered') {
+    if (status === 'recovered') {
       return ['#33b349'];
     }
-    if (status === 'Deaths') {
+    if (status === 'deaths') {
       return ['#eeeeee'];
     }
   }
   if (type === 'border') {
-    if (status === 'Confirmed') {
+    if (status === 'cases') {
       return ['#902039'];
     }
-    if (status === 'Recovered') {
+    if (status === 'recovered') {
       return ['#278040'];
     }
-    if (status === 'Deaths') {
+    if (status === 'deaths') {
       return ['#eeeeee'];
     }
   }
   return '#eeeeee';
 };
 
-export default function newChart(data, country, type) {
+export default function newChart(data, country, typeStatus) {
   const ctx = document.getElementById('covid-chart').getContext('2d');
 
-  getChartData(country, type).then((countryData) => {
-    const labels = [];
-    let statuses = ['Confirmed', 'Recovered', 'Deaths'];
-    if (type !== 'All') {
-      statuses = ['Cases'];
-    }
+  let typeAPI = '';
+  if (typeStatus === 'All') {
+    typeAPI = 'CountryByDays';
+  }
+  getData(typeAPI, country).then((countryData) => {
+    let labels = [];
+    const statuses = ['cases', 'recovered', 'deaths'];
+
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    const datasets = [];
-    countryData.forEach((item) => {
-      const date = new Date(item.Date);
+    const { timeline } = countryData;
+    const { cases } = timeline;
+    labels = Object.keys(cases).map((dateItem) => {
+      const date = new Date(dateItem);
       const month = date.getMonth();
-      labels.push(`${date.getDate()} ${months[month]}`);
+      return `${date.getDate()} ${months[month]}`;
     });
+    const datasets = [];
     for (let i = 0; i < statuses.length; i += 1) {
-      const chartData = [];
-      const statusLabel = new Set();
-      countryData.forEach((item) => {
-        if (item[statuses[i]]) {
-          chartData.push(item[statuses[i]]);
-          statusLabel.add(statuses[i]);
+      const chartStatus = statuses[i];
+      let chartData = [];
+      Object.entries(timeline).forEach(([item, dataObj]) => {
+        if (item === chartStatus) {
+          chartData = Object.values(dataObj);
         }
       });
       const dataset = {
-        label: `${Array.from(statusLabel)} (${country})`,
+        label: `${chartStatus} (${country})`,
         data: chartData,
         borderWidth: 2,
         backgroundColor: getChartColors(statuses[i], 'background'),
@@ -97,8 +91,5 @@ export default function newChart(data, country, type) {
         },
       },
     });
-  });
-  getChartData.catch((error) => {
-    console.log(`Ошибка получения данных${error}`);
   });
 }
