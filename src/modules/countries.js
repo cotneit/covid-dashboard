@@ -1,6 +1,4 @@
 import State from './state';
-import map from './map';
-import newChart from './covid-chart';
 
 // Источник: https://codepen.io/dcode-software/pen/zYGOrzK
 
@@ -45,7 +43,7 @@ export default function countriesTable(data, country, type) {
   data.forEach((elem, index) => {
     const tr = document.createElement('tr');
     tr.className = 'country-table__row';
-    
+
     if (elem.country === country) {
       tr.style.background = 'red';
     }
