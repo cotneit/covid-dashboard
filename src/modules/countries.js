@@ -1,5 +1,4 @@
-import map from './map';
-import newChart from './covid-chart';
+import State from './state';
 
 // Источник: https://codepen.io/dcode-software/pen/zYGOrzK
 
@@ -28,6 +27,8 @@ function sortTableByColumn(table, column, asc = true) {
 }
 
 export default function countriesTable(data, country, type) {
+  const state = new State();
+
   document.querySelector('#country').innerHTML = '';
   const divTable = document.createElement('div');
   divTable.className = 'country-table';
@@ -39,13 +40,19 @@ export default function countriesTable(data, country, type) {
   thead.innerHTML = '<tr class="country-table__row country-table__row--header"><th>Country</th><th>Cases</th><th>Deaths</th><th>Recovered</th></tr>';
   const tbody = document.createElement('tbody');
 
-  data.forEach((elem) => {
+  data.forEach((elem, index) => {
     const tr = document.createElement('tr');
     tr.className = 'country-table__row';
+
+    if (elem.country === country) {
+      tr.style.background = 'red';
+    }
+
     tr.innerHTML = `<tr><td>${elem.country}</td><td>${elem.cases}</td><td>${elem.deaths}</td><td>${elem.recovered}</td></tr>`;
     tr.addEventListener('click', () => {
-      map(data, elem.country, type);
-      newChart(data, elem.country, type);
+      localStorage.setItem('search-scroll', 69.3 * index);
+      localStorage.setItem('countries-scroll', divTable.scrollTop);
+      state.update(data, elem.country, type);
     });
     tbody.appendChild(tr);
   });
@@ -55,6 +62,8 @@ export default function countriesTable(data, country, type) {
   divTable.appendChild(table);
 
   document.querySelector('#country').appendChild(divTable);
+
+  divTable.scrollTo(0, localStorage.getItem('countries-scroll'));
 
   document.querySelectorAll('.country_sort th').forEach((headerCell) => {
     headerCell.addEventListener('click', () => {

@@ -3,8 +3,7 @@
   height: 100%;
   overflow-y: scroll;
   position: relative;
-
-  background: #93c54b;
+  background: $grey-dark-v2;
   font-family: 'Roboto', sans-serif;
   
   &__inner {
@@ -17,11 +16,11 @@
     color: white;
     line-height: 2rem;
     text-transform: capitalize;
-    border-bottom: 1px solid#517d6788;
+    border-bottom: 1px solid #aba3a31c;
 
     &:hover {
       cursor: pointer;
-      background: green;
+      background: #1d1b1b;
     }
 
     &--header {
