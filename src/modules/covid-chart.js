@@ -6,6 +6,15 @@ import getData from './api';
  */
 let chart = null;
 
+function updateChart() {
+  chart.data.labels = [];
+  for (let i = 0; i < chart.data.datasets.length; i += 1) {
+    chart.data.datasets[i].data = [];
+    chart.data.datasets[i].label = ['Country not found'];
+  }
+  chart.update();
+}
+
 const getChartColors = (status, type) => {
   if (type === 'background') {
     if (status === 'cases') {
@@ -32,14 +41,16 @@ const getChartColors = (status, type) => {
   return '#eeeeee';
 };
 
-export default function newChart(data, country, typeStatus) {
+export default async function newChart(data, country, typeStatus) {
   const ctx = document.getElementById('covid-chart').getContext('2d');
 
   let typeAPI = '';
   if (typeStatus === 'All') {
     typeAPI = 'CountryByDays';
   }
-  getData(typeAPI, country).then((countryData) => {
+  try {
+    const countryData = await getData(typeAPI, country);
+
     let labels = [];
     const statuses = ['cases', 'recovered', 'deaths'];
 
@@ -76,7 +87,6 @@ export default function newChart(data, country, typeStatus) {
     }
     chart = new Chart(ctx, {
       type: 'line',
-
       data: { labels, datasets },
       options: {
         responsive: true,
@@ -91,5 +101,10 @@ export default function newChart(data, country, typeStatus) {
         },
       },
     });
-  });
+  } catch (error) {
+    console.log(`${error} chart: Country not found`);
+    if (chart) {
+      updateChart();
+    }
+  }
 }
