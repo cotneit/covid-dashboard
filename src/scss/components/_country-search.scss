@@ -2,7 +2,7 @@ input{
     font-family: 'Roboto', sans-serif;
     border-radius: 3px;
     border: 1px solid #242429;
-    background: #2f2f33;
+    background: $grey-lighter;
     outline: none;
     padding: 15px;
     width: 300px;
@@ -27,7 +27,7 @@ input{
 }
   
 .country-item{
-    background-color: #2f2f33;
+    background-color: $grey-dark-v2;
     font-family: 'Roboto', sans-serif;
     border-radius: 3px;
     display: flex;

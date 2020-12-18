@@ -3,7 +3,8 @@ import L from 'leaflet/dist/leaflet';
 
 // Источник: https://www.freecodecamp.org/news/how-to-create-a-coronavirus-covid-19-dashboard-map-app-in-react-with-gatsby-and-leaflet/
 
-let maps, marker;
+let maps; let
+  marker;
 
 function getSize(d) {
   if (d > 7) return [57, 57];

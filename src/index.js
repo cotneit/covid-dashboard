@@ -1,6 +1,7 @@
 import getData from './modules/api';
 import map from './modules/map';
 import countriesTable from './modules/countries';
+import newChart from './modules/covid-chart';
 import State from './modules/state';
 import showCountries from './modules/search';
 import worldInfo from './modules/global';
@@ -19,6 +20,10 @@ function init(data) {
 
   state.subscribe((json, country, type) => {
     map(json, country, type);
+  });
+
+  state.subscribe((json, country, type) => {
+    newChart(json, country, type);
   });
 
   state.subscribe((json, country, type) => {
