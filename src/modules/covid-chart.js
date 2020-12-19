@@ -1,4 +1,5 @@
 import Chart from 'chart.js/dist/Chart.bundle.min';
+
 import getData from './api';
 
 /**
@@ -8,9 +9,9 @@ let chart = null;
 
 function updateChart() {
   chart.data.labels = [];
+  chart.options.title.text = 'Country not found or doesn\'t have any historical data';
   for (let i = 0; i < chart.data.datasets.length; i += 1) {
     chart.data.datasets[i].data = [];
-    chart.data.datasets[i].label = ['Country not found'];
   }
   chart.update();
 }
@@ -53,15 +54,11 @@ export default async function newChart(data, country, typeStatus) {
 
     let labels = [];
     const statuses = ['cases', 'recovered', 'deaths'];
-
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
     const { timeline } = countryData;
     const { cases } = timeline;
     labels = Object.keys(cases).map((dateItem) => {
       const date = new Date(dateItem);
-      const month = date.getMonth();
-      return `${date.getDate()} ${months[month]}`;
+      return `${date.toISOString()}`;
     });
     const datasets = [];
     for (let i = 0; i < statuses.length; i += 1) {
@@ -73,10 +70,11 @@ export default async function newChart(data, country, typeStatus) {
         }
       });
       const dataset = {
-        label: `${chartStatus} (${country})`,
+        label: `${chartStatus}`,
         data: chartData,
         borderWidth: 2,
         backgroundColor: getChartColors(statuses[i], 'background'),
+        hoverBorderColor: ' #eeeeee',
         borderColor: getChartColors(statuses[i], 'border'),
         fill: false,
       };
@@ -89,13 +87,59 @@ export default async function newChart(data, country, typeStatus) {
       type: 'line',
       data: { labels, datasets },
       options: {
+        title: {
+          display: true,
+          position: 'top',
+          text: country,
+          fontSize: 18,
+        },
+        legend: {
+          display: true,
+          position: 'top',
+          align: 'center',
+          fontFamily: 'Roboto',
+        },
+        tooltips: {
+          borderWidth: 2,
+          borderColor: ' #1c1c22',
+          backgroundColor: '#eeeeee',
+          titleFontColor: ' #1c1c22',
+          bodyFontColor: ' #1c1c22',
+          callbacks: {
+            labelColor(tooltipItem, labelChart) {
+              const currentSet = labelChart.config.data.datasets[tooltipItem.datasetIndex];
+              return {
+                borderColor: currentSet.borderColor,
+                backgroundColor: currentSet.backgroundColor,
+              };
+            },
+          },
+        },
         responsive: true,
         maintainAspectRatio: true,
         scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false,
-              stepSize: 1000,
+          yAxes: [
+            {
+              id: 'linearYAxis',
+              type: 'linear',
+              display: 'auto',
+              ticks: {
+                callback: (value) => value.toLocaleString(),
+              },
+            },
+            {
+              id: 'logYAxis',
+              type: 'logarithmic',
+              display: 'auto',
+            },
+          ],
+          xAxes: [{
+            type: 'time',
+            position: 'bottom',
+            time: {
+              displayFormats: { day: 'MM/YY' },
+              tooltipFormat: 'DD/MM/YY',
+              unit: 'month',
             },
           }],
         },
