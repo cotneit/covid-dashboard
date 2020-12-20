@@ -18,6 +18,8 @@ input{
 }
 
 .countries{
+    @include scrollbar();
+
     padding: 0 10px 0 0;
     list-style-type: none;
     width: 360px;
