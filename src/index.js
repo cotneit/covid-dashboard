@@ -64,13 +64,20 @@ function init(data) {
       newChart(json, country, type, 'deaths', show);
     };
 
-    const selectedStatus = document.querySelectorAll('.chart-buttons');
-    selectedStatus.forEach((elem) => {
-      elem.addEventListener('click', (event) => {
-        const currentStatus = event.target;
-        map(json, country, type, currentStatus.dataset.status, show);
-      });
-    });
+    document.querySelector('#chart-cases').onclick = function () {
+      map(json, country, type, 'cases', show);
+      newChart(json, country, type, 'cases', show);
+    };
+
+    document.querySelector('#chart-recovered').onclick = function () {
+      map(json, country, type, 'recovered', show);
+      newChart(json, country, type, 'recovered', show);
+    };
+
+    document.querySelector('#chart-deaths').onclick = function () {
+      map(json, country, type, 'deaths', show);
+      newChart(json, country, type, 'deaths', show);
+    };
 
     document.querySelector('#search').oninput = function (e) {
       showCountries(json, country, type, show, e.target.value);
@@ -104,6 +111,48 @@ function init(data) {
           worldInfo(globalData);
           break;
         default:
+          state.update(data, country, type, 'Absolute');
+          worldInfo(globalData);
+          break;
+      }
+    };
+
+    document.querySelector('#chart-time').onchange = function (e) {
+      const time = document.querySelector('#time');
+      switch (e.target.value) {
+        case '1':
+          time.selectedIndex = 0;
+          state.update(data, country, 'All', show);
+          worldInfo(globalData);
+          break;
+        case '2':
+          time.selectedIndex = 1;
+          state.update(data, country, 'Last', show);
+          worldInfo(globalData);
+          break;
+        default:
+          time.selectedIndex = 0;
+          state.update(data, country, 'All', show);
+          worldInfo(globalData);
+          break;
+      }
+    };
+
+    document.querySelector('#chart-values').onchange = function (e) {
+      const values = document.querySelector('#values');
+      switch (e.target.value) {
+        case '1':
+          values.selectedIndex = 0;
+          state.update(data, country, type, 'Absolute');
+          worldInfo(globalData);
+          break;
+        case '2':
+          values.selectedIndex = 1;
+          state.update(data, country, type, 'One hund');
+          worldInfo(globalData);
+          break;
+        default:
+          values.selectedIndex = 0;
           state.update(data, country, type, 'Absolute');
           worldInfo(globalData);
           break;
