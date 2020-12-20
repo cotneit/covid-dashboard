@@ -2,10 +2,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: $white;
   font-weight: bold;
-  background-color: $red-prim;
   opacity: 0.95;
   border-radius: 100%;
   box-shadow: 0 2px 5px rgb(0, 0, 0, 0.3);
+  &__red {
+    background-color: $red-prim;
+  }
+  &__green {
+    background-color: $green-prim;
+  }
+  &__dark {
+    background-color: $text-grey-b;
+  }
+}
+
+.leaflet-popup-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: $grey-light;
+  color: $white;
 }

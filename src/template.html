@@ -12,11 +12,25 @@
     <h1 class="header__heading">COVID-19 Dashboard</h1>
     <div class="header__info">
       <p class="header__last-updated"></p>
+      <div class="header__buttons">
+        <select name="time" id="time">
+          <option value="1" id="time_1">За весь период</option>
+          <option value="2" id="time_2">За последние сутки</option>
+        </select>
+        <select name="values" id="values">
+          <option value="1" id="values_1">Абсолютные значения</option>
+          <option value="2" id="values_2">На 100 тыс. населения</option>
+        </select>
+        <button id="map-cases">Cases</button>
+        <button id="map-recovered">Recovered</button>
+        <button id="map-deaths">Deaths</button>
+      </div>
     </div>
   </section>
   <section class="table app__table" id="country"></section>
   <section class="list app__list">
     <div class="world-data"></div>
+    <div class="country-info"></div>
     <div class="country-search">
       <input type="text" id="search" placeholder="Search for a Country">
       <div id="results"></div>

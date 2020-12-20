@@ -26,7 +26,7 @@ function sortTableByColumn(table, column, asc = true) {
   table.querySelector(`th:nth-child(${column + 1})`).classList.toggle('th-sort-desc', !asc);
 }
 
-export default function countriesTable(data, country, type) {
+export default function countriesTable(data, country, type, show) {
   const state = new State();
 
   document.querySelector('#country').innerHTML = '';
@@ -41,6 +41,8 @@ export default function countriesTable(data, country, type) {
   const tbody = document.createElement('tbody');
 
   data.forEach((elem, index) => {
+    let cases; let deaths; let
+      recovered;
     const tr = document.createElement('tr');
     tr.className = 'country-table__row';
 
@@ -48,11 +50,20 @@ export default function countriesTable(data, country, type) {
       tr.style.background = 'red';
     }
 
-    tr.innerHTML = `<tr><td>${elem.country}</td><td>${elem.cases}</td><td>${elem.deaths}</td><td>${elem.recovered}</td></tr>`;
+    if (type === 'All') cases = (show === 'Absolute') ? elem.cases : Math.round((elem.cases / elem.population) * 100000);
+    else cases = (show === 'Absolute') ? elem.todayCases : Math.round((elem.todayCases / elem.population) * 100000);
+
+    if (type === 'All') deaths = (show === 'Absolute') ? elem.deaths : Math.round((elem.deaths / elem.population) * 100000);
+    else deaths = (show === 'Absolute') ? elem.todayDeaths : Math.round((elem.todayDeaths / elem.population) * 100000);
+
+    if (type === 'All') recovered = (show === 'Absolute') ? elem.recovered : Math.round((elem.recovered / elem.population) * 100000);
+    else recovered = (show === 'Absolute') ? elem.todayRecovered : Math.round((elem.todayRecovered / elem.population) * 100000);
+
+    tr.innerHTML = `<tr><td>${elem.country}</td><td>${cases}</td><td>${deaths}</td><td>${recovered}</td></tr>`;
     tr.addEventListener('click', () => {
       localStorage.setItem('search-scroll', 69.3 * index);
       localStorage.setItem('countries-scroll', divTable.scrollTop);
-      state.update(data, elem.country, type);
+      state.update(data, elem.country, type, show);
     });
     tbody.appendChild(tr);
   });
