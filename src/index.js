@@ -36,8 +36,8 @@ function init(data) {
     map(json, country, type, 'cases', show);
   });
 
-  state.subscribe('newChart', (json, country, type) => {
-    newChart(json, country, type);
+  state.subscribe('newChart', (json, country, type, show) => {
+    newChart(json, country, type, 'cases', show);
   });
 
   state.subscribe('showCountries', (json, country, type, show) => {
@@ -51,15 +51,26 @@ function init(data) {
   state.subscribe('events', (json, country, type, show) => {
     document.querySelector('#map-cases').onclick = function () {
       map(json, country, type, 'cases', show);
+      newChart(json, country, type, 'cases', show);
     };
 
     document.querySelector('#map-recovered').onclick = function () {
       map(json, country, type, 'recovered', show);
+      newChart(json, country, type, 'recovered', show);
     };
 
     document.querySelector('#map-deaths').onclick = function () {
       map(json, country, type, 'deaths', show);
+      newChart(json, country, type, 'deaths', show);
     };
+
+    const selectedStatus = document.querySelectorAll('.chart-buttons');
+    selectedStatus.forEach((elem) => {
+      elem.addEventListener('click', (event) => {
+        const currentStatus = event.target;
+        map(json, country, type, currentStatus.dataset.status, show);
+      });
+    });
 
     document.querySelector('#search').oninput = function (e) {
       showCountries(json, country, type, show, e.target.value);

@@ -12,7 +12,7 @@
     <h1 class="header__heading">COVID-19 Dashboard</h1>
     <div class="header__info">
       <p class="header__last-updated"></p>
-      <div class="header__buttons">
+      <div class="switch__buttons">
         <select name="time" id="time">
           <option value="1" id="time_1">За весь период</option>
           <option value="2" id="time_2">За последние сутки</option>
@@ -37,8 +37,12 @@
     </div>
   </section>
   <section class="map app__map" id="map"></section>
-  <section class="graph app__graph"></section>
   <section class="graph app__graph">
+    <div class="switch__buttons">
+      <button class="chart-buttons" data-status="cases">Cases</button>
+      <button class="chart-buttons" data-status="recovered">Recovered</button>
+      <button class="chart-buttons" data-status="deaths">Deaths</button>
+    </div>
     <canvas id="covid-chart"></canvas>
   </section>
 </body>
