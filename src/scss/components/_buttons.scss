@@ -1,0 +1,15 @@
+.header__buttons {
+    display: flex;
+    & button {
+        background: $grey-dark;
+        border: none;
+        outline: none;
+        color: #ffff;
+        padding: 10px;
+
+        &:hover {
+            background: $grey-lighter;
+            cursor: pointer;
+        }
+    }
+}

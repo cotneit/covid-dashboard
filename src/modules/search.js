@@ -8,7 +8,7 @@ function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-export default function showCountries(data, country, type, searchTerm = '') {
+export default function showCountries(data, country, type, show, searchTerm = '') {
   const state = new State();
 
   results.innerHTML = '';
@@ -53,7 +53,7 @@ export default function showCountries(data, country, type, searchTerm = '') {
       li.addEventListener('click', () => {
         localStorage.setItem('search-scroll', ul.scrollTop);
         localStorage.setItem('countries-scroll', 36.4 * index);
-        state.update(data, obj.country, type);
+        state.update(data, obj.country, type, show);
       });
 
       ul.appendChild(li);
