@@ -1,0 +1,25 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-sass-guidelines", "stylelint-config-recess-order"],
+  "plugins": [
+    "stylelint-scss",
+    "stylelint-order"
+  ],
+  "rules": {
+    "at-rule-semicolon-newline-after": "always",
+    "order/properties-alphabetical-order": null,
+    "declaration-empty-line-before": null,
+    "max-nesting-depth": 3,
+
+    "at-rule-semicolon-space-before": "never",
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        "except": ["blockless-after-same-name-blockless", "first-nested"],
+        "ignore": ["after-comment"],
+        "ignoreAtRules": ["import"]
+      }
+    ],
+    
+    "declaration-property-value-disallowed-list": null
+  }
+}
