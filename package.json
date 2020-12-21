@@ -5,7 +5,8 @@
   "private": "true",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint **/*.js",
+    "eslint": "eslint **/*.js",
+    "stylelint": "stylelint src/scss/**",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "watch": "webpack --mode production --watch",
@@ -26,6 +27,13 @@
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
+    "stylelint": "^13.8.0",
+    "stylelint-config-concentric-order": "^4.0.0",
+    "stylelint-config-recess-order": "^2.3.0",
+    "stylelint-config-sass-guidelines": "^7.1.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.18.0",
     "webpack": "^5.10.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
