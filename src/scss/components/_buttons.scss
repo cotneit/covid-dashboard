@@ -1,15 +1,16 @@
 .switch__buttons {
-    display: flex;
-    & button {
-        background: $grey-dark;
-        border: none;
-        outline: none;
-        color: #ffff;
-        padding: 10px;
+  display: flex;
 
-        &:hover {
-            background: $grey-lighter;
-            cursor: pointer;
-        }
+  & button {
+    padding: 10px;
+    color: #ffff;
+    background: $grey-dark;
+    border: none;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+      background: $grey-lighter;
     }
+  }
 }

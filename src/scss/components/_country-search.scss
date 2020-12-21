@@ -1,77 +1,82 @@
-input{
-    font-family: 'Roboto', sans-serif;
-    border-radius: 3px;
-    border: 1px solid #242429;
-    background: $grey-lighter;
-    outline: none;
-    padding: 15px;
-    width: 300px;
-    color: #ffff;
-    margin: 15px 0 0 0;
+input {
+  width: 300px;
+  padding: 15px;
+  margin: 15px 0 0;
+  font-family: 'Roboto', sans-serif;
+  color: #ffff;
+  background: $grey-lighter;
+  border: 1px solid #242429;
+  border-radius: 3px;
+  outline: none;
 }
 
 .country-search {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
-.countries{
-    @include scrollbar();
+.countries {
+  @include scrollbar();
 
-    padding: 0 10px 0 0;
-    list-style-type: none;
-    width: 360px;
-    transition: 0.5s;
-    height: 340px;
-    overflow-y: scroll;
+  width: 360px;
+  height: 340px;
+  padding: 0 10px 0 0;
+  overflow-y: scroll;
+  list-style-type: none;
+  transition: 0.5s;
 }
-  
-.country-item{
-    background-color: $grey-dark-v2;
-    font-family: 'Roboto', sans-serif;
-    border-radius: 3px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 10px;
-    margin: 10px 0;
-    transition: 0.5s;
-    color: #ffff;
-  &:hover{
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+
+.country-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 10px 0;
+  font-family: 'Roboto', sans-serif;
+  color: #ffff;
+  background-color: $grey-dark-v2;
+  border-radius: 3px;
+  transition: 0.5s;
+
+  &:hover {
     cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   }
-  &__flag{
+
+  &__flag {
     width: 40px;
   }
-  &__name{
+
+  &__name {
     flex: 2;
-    font-weight: normal;
-    letter-spacing: .5px;
     margin: 0 5px;
+    font-weight: normal;
     text-align: center;
-  }
-  &__info{
-    border-left: 1px solid #aaa;
-    color: #aba3a3;
-    padding: 0 15px;
-    flex: 1;
+    letter-spacing: 0.5px;
   }
 
-  &__population{
-    font-weight: 300;
-    letter-spacing: 1px;
+  &__info {
+    flex: 1;
+    padding: 0 15px;
+    color: #aba3a3;
+    border-left: 1px solid #aaa;
+  }
+
+  &__population {
     margin: 0;
     margin-bottom: 12px;
     font-size: 11px;
-    &--text{
-        font-weight: 300;
-        letter-spacing: 1px;
-        margin: 0;
-        text-transform: uppercase;
-        font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 1px;
+
+    &--text {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
   }
 }
