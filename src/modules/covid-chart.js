@@ -181,9 +181,13 @@ export default async function newChart(json, country, typeStatus, showType, show
   try {
     const location = document.querySelector('.location');
     const selectedLocation = location.options[location.selectedIndex].text;
+    let globalData = null;
 
+    if (selectedLocation === 'Global') {
+      globalData = await getData('World');
+    }
     const choice = (selectedLocation === 'Global') ? selectedLocation : country;
-    const { population } = (selectedLocation === 'Global') ? json : json.find((obj) => obj.country === country);
+    const { population } = (selectedLocation === 'Global') ? globalData : json.find((obj) => obj.country === country);
     const countryAPI = (selectedLocation === 'Global') ? 'all' : country;
     const countryData = await getData('chartAPI', countryAPI);
     const chartNew = new CreateChart(countryData, choice, typeStatus, showType, show, population);
