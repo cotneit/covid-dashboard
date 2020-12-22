@@ -52,7 +52,12 @@ class CreateChart {
     }
     const ctx = document.getElementById('covid-chart').getContext('2d');
     let labels = [];
-    const { timeline } = this.countryData;
+    let timeline;
+    if (this.country === 'Global') {
+      timeline = this.countryData;
+    } else {
+      timeline = this.countryData.timeline;
+    }
 
     const { cases, recovered, deaths } = timeline;
     let labelObj = cases;
@@ -162,9 +167,14 @@ class CreateChart {
 
 export default async function newChart(json, country, typeStatus, showType, show) {
   try {
-    const { population } = json.find((obj) => obj.country === country);
-    const countryData = await getData('chartAPI', country);
-    const chartNew = new CreateChart(countryData, country, typeStatus, showType, show, population);
+    const location = document.querySelector('.location');
+    const selectedLocation = location.options[location.selectedIndex].text;
+
+    const choice = (selectedLocation === 'Global') ? selectedLocation : country;
+    const { population } = (selectedLocation === 'Global') ? json : json.find((obj) => obj.country === country);
+    const countryAPI = (selectedLocation === 'Global') ? 'all' : country;
+    const countryData = await getData('chartAPI', countryAPI);
+    const chartNew = new CreateChart(countryData, choice, typeStatus, showType, show, population);
     chartNew.draw();
   } catch (error) {
     console.log(`${error} chart: Country not found or doesn't have any historical data`);
