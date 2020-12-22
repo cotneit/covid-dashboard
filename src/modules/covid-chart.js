@@ -91,7 +91,7 @@ class CreateChart {
       data: chartData,
       borderWidth: 2,
       backgroundColor: getChartColors(this.showType, 'background'),
-      hoverBorderColor: ' #eeeeee',
+      hoverBorderColor: '#eeeeee',
       borderColor: getChartColors(this.showType, 'border'),
       fill: false,
     };
@@ -103,7 +103,7 @@ class CreateChart {
     configChart();
     chart = new Chart(ctx, {
       type: typeChart,
-      data: { labels, datasets, backgroundColor: getChartColors(this.showType, 'background') },
+      data: { labels, datasets },
       options: {
         title: {
           display: true,

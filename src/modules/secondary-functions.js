@@ -16,26 +16,27 @@ function increasePerDay(value, prevValue) {
 }
 
 function getChartColors(status, type) {
+  console.log(status);
   if (type === 'background') {
     if (status === 'cases') {
-      return ['#c8354e'];
+      return '#c8354e';
     }
     if (status === 'recovered') {
-      return ['#33b349'];
+      return '#33b349';
     }
     if (status === 'deaths') {
-      return ['#888888'];
+      return '#888888';
     }
   }
   if (type === 'border') {
     if (status === 'cases') {
-      return ['#902039'];
+      return '#902039';
     }
     if (status === 'recovered') {
-      return ['#278040'];
+      return '#278040';
     }
     if (status === 'deaths') {
-      return [' #888888'];
+      return '#888888';
     }
   }
   return '#eeeeee';
