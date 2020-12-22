@@ -93,22 +93,22 @@ export default function map(data, oneCountry, type, showType, show) {
     pointToLayer(feature, latlng) {
       switch (showType) {
         case 'cases':
-          color = 'icon-marker__red';
+          color = 'icon-marker--red';
           if (type === 'All') casesString = (show === 'Absolute') ? feature.properties.cases : Math.round((feature.properties.cases / feature.properties.population) * 100000);
           else casesString = (show === 'Absolute') ? feature.properties.todayCases : Math.round((feature.properties.todayCases / feature.properties.population) * 100000);
           break;
         case 'recovered':
-          color = 'icon-marker__green';
+          color = 'icon-marker--green';
           if (type === 'All') casesString = (show === 'Absolute') ? feature.properties.recovered : Math.round((feature.properties.recovered / feature.properties.population) * 100000);
           else casesString = (show === 'Absolute') ? feature.properties.todayRecovered : Math.round((feature.properties.todayRecovered / feature.properties.population) * 100000);
           break;
         case 'deaths':
-          color = 'icon-marker__dark';
+          color = 'icon-marker--dark';
           if (type === 'All') casesString = (show === 'Absolute') ? feature.properties.deaths : Math.round((feature.properties.deaths / feature.properties.population) * 100000);
           else casesString = (show === 'Absolute') ? feature.properties.todayDeaths : Math.round((feature.properties.todayDeaths / feature.properties.population) * 100000);
           break;
         default:
-          color = 'icon-marker__red';
+          color = 'icon-marker--red';
           if (type === 'All') casesString = (show === 'Absolute') ? feature.properties.cases : Math.round((feature.properties.cases / feature.properties.population) * 100000);
           else casesString = (show === 'Absolute') ? feature.properties.todayCases : Math.round((feature.properties.todayCases / feature.properties.population) * 100000);
           break;

@@ -8,15 +8,15 @@
   box-shadow: 0 2px 5px rgb(0, 0, 0, 0.3);
   opacity: 0.95;
 
-  &__red {
+  &--red {
     background-color: $red-prim;
   }
 
-  &__green {
+  &--green {
     background-color: $green-prim;
   }
 
-  &__dark {
+  &--dark {
     background-color: $text-grey-b;
   }
 }

@@ -1,0 +1,12 @@
+.button {
+  padding: 10px;
+  color: #ffff;
+  background: $grey-dark;
+  border: none;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+    background: $grey-lighter;
+  }
+}
