@@ -1,20 +1,33 @@
 .world-data {
   display: flex;
-  justify-content: space-around;
-  margin: 10px 0 0;
+  justify-content: space-between;
   font-family: 'Roboto', sans-serif;
   color: #ffff;
 
   &__card {
+    box-sizing: border-box;
+    width: 32.5%;
     padding: 10px;
     text-align: center;
     background-color: $grey-dark-v2;
     border-radius: 3px;
-    transition: 0.5s;
+    transition: 0.3s;
 
     &:hover {
       cursor: pointer;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    &--total &-amount {
+      color: $red-prim;
+    }
+
+    &--dead &-amount {
+      color: $blue-prim;
+    }
+
+    &--recovered &-amount {
+      color: $green-prim;
     }
   }
 }
