@@ -20,7 +20,7 @@ function init(data) {
 
   const index = data.map((e) => e.country).indexOf('Belarus');
   const location = document.querySelector('.location');
-  location.selectedIndex = 1;
+  location.selectedIndex = 0;
 
   localStorage.setItem('map-zoom', 6);
   localStorage.setItem('search-scroll', 69.3 * index);
