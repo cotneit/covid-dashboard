@@ -91,7 +91,7 @@ class CreateChart {
       data: chartData,
       borderWidth: 2,
       backgroundColor: getChartColors(this.showType, 'background'),
-      hoverBorderColor: '#eeeeee',
+      hoverBorderColor: getChartColors(),
       borderColor: getChartColors(this.showType, 'border'),
       fill: false,
     };
@@ -118,10 +118,10 @@ class CreateChart {
         },
         tooltips: {
           borderWidth: 2,
-          borderColor: '#1c1c22',
-          backgroundColor: '#eeeeee',
-          titleFontColor: '#1c1c22',
-          bodyFontColor: '#1c1c22',
+          borderColor: getChartColors('font', 'chart'),
+          backgroundColor: getChartColors(),
+          titleFontColor: getChartColors('font', 'chart'),
+          bodyFontColor: getChartColors('font', 'chart'),
           callbacks: {
             labelColor(tooltipItem, labelChart) {
               const currentSet = labelChart.config.data.datasets[tooltipItem.datasetIndex];
@@ -137,6 +137,10 @@ class CreateChart {
         scales: {
           yAxes: [
             {
+              gridLines: {
+                color: getChartColors('gridLine', 'chart'),
+                borderDash: [6, 2],
+              },
               id: 'linearYAxis',
               type: 'linear',
               display: 'auto',
@@ -150,15 +154,23 @@ class CreateChart {
               display: 'auto',
             },
           ],
-          xAxes: [{
-            type: 'time',
-            position: 'bottom',
-            time: {
-              displayFormats: { day: 'MM/YY' },
-              tooltipFormat: 'DD/MM/YY',
-              unit: 'month',
+          xAxes: [
+            {
+              gridLines: {
+                display: true,
+                color: getChartColors('gridLine', 'chart'),
+                borderDash: [2, 4],
+              },
+              offsetGridLines: true,
+              type: 'time',
+              position: 'bottom',
+              time: {
+                displayFormats: { day: 'MM/YY' },
+                tooltipFormat: 'DD/MM/YY',
+                unit: 'month',
+              },
             },
-          }],
+          ],
         },
       },
     });
@@ -169,9 +181,13 @@ export default async function newChart(json, country, typeStatus, showType, show
   try {
     const location = document.querySelector('.location');
     const selectedLocation = location.options[location.selectedIndex].text;
+    let globalData = null;
 
+    if (selectedLocation === 'Global') {
+      globalData = await getData('World');
+    }
     const choice = (selectedLocation === 'Global') ? selectedLocation : country;
-    const { population } = (selectedLocation === 'Global') ? json : json.find((obj) => obj.country === country);
+    const { population } = (selectedLocation === 'Global') ? globalData : json.find((obj) => obj.country === country);
     const countryAPI = (selectedLocation === 'Global') ? 'all' : country;
     const countryData = await getData('chartAPI', countryAPI);
     const chartNew = new CreateChart(countryData, choice, typeStatus, showType, show, population);
