@@ -7,11 +7,11 @@
   align-items: center;
   justify-content: space-between;
   min-height: 100px;
-  padding: 10px;
+  padding: 5px;
 
   &__heading {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: $ff-prim;
     font-weight: 500;
     color: $white;
   }
@@ -21,7 +21,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    font-family: 'Roboto', sans-serif;
+    font-family: $ff-prim;
     font-weight: 400;
     color: $white;
   }
