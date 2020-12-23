@@ -2,10 +2,11 @@
   @include scrollbar();
 
   position: relative;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  font-family: 'Roboto', sans-serif;
+  font-family: $ff-prim;
   background: $grey-dark-v2;
 
   &__inner {
@@ -38,7 +39,7 @@
     font-size: 1rem;
     font-weight: lighter;
     line-height: 2rem;
-    color: #f7ffff;
+    color: $white;
     letter-spacing: 0.05em;
     cursor: pointer;
     background: #517d67;

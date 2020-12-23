@@ -12,7 +12,10 @@ function configChart() {
   Chart.defaults.global.defaultFontFamily = 'Roboto';
   Chart.defaults.global.defaultFontColor = '#eeeeee';
   Chart.Legend.prototype.afterFit = function () {
-    this.height += 15;
+    this.height += 0;
+  };
+  Chart.Title.prototype.afterFit = function () {
+    this.height -= 38;
   };
 }
 let chart = null;
@@ -110,11 +113,15 @@ class CreateChart {
           position: 'top',
           text: this.country,
           fontSize: 18,
+          fontStyle: '500',
         },
         legend: {
           display: true,
           position: 'top',
-          align: 'start',
+          align: 'end',
+          labels: {
+            fontSize: 14,
+          },
         },
         tooltips: {
           borderWidth: 2,
