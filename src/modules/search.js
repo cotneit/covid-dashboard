@@ -14,7 +14,7 @@ export default function showCountries(data, country, type, show, searchTerm = ''
   results.innerHTML = '';
 
   const ul = document.createElement('ul');
-  ul.classList.add('countries');
+  ul.classList.add('country-list__inner');
 
   data
     .filter((item) => item.country.toLowerCase().includes(searchTerm.toLowerCase()))

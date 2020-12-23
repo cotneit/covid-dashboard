@@ -15,7 +15,7 @@ export default function showCountryInfo(data, country, type, show) {
   if (type === 'All') deaths = (show === 'Absolute') ? oneCountryInfo.deaths : Math.round((oneCountryInfo.deaths / oneCountryInfo.population) * 100000);
   else deaths = (show === 'Absolute') ? oneCountryInfo.todayDeaths : Math.round((oneCountryInfo.todayDeaths / oneCountryInfo.population) * 100000);
 
-  countryInfo.innerHTML = `<div class="country-name">
+  countryInfo.innerHTML = `<div class="country-info__country">
         <img src="${oneCountryInfo.countryInfo.flag}">
         <h2>${country}</h2>
     </div>
