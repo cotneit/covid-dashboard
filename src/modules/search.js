@@ -2,7 +2,7 @@ import State from './state';
 
 // Источник: https://codepen.io/bludce/pen/KOmYyV?editors=0110
 
-const results = document.getElementById('results');
+const list = document.querySelector('.country-list__inner');
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -10,11 +10,9 @@ function numberWithCommas(x) {
 
 export default function showCountries(data, country, type, show, searchTerm = '') {
   const state = new State();
+  const listItems = document.createDocumentFragment();
 
-  results.innerHTML = '';
-
-  const ul = document.createElement('ul');
-  ul.classList.add('country-list__inner');
+  list.innerHTML = '';
 
   data
     .filter((item) => item.country.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -51,13 +49,13 @@ export default function showCountries(data, country, type, show, searchTerm = ''
       if (obj.country === country) li.style.background = '#1d1b1b';
 
       li.addEventListener('click', () => {
-        localStorage.setItem('search-scroll', ul.scrollTop);
+        localStorage.setItem('search-scroll', list.scrollTop);
         localStorage.setItem('countries-scroll', 36.4 * index);
         state.update(data, obj.country, type, show);
       });
 
-      ul.appendChild(li);
+      listItems.appendChild(li);
     });
-  results.appendChild(ul);
-  ul.scrollTo(0, localStorage.getItem('search-scroll'));
+  list.appendChild(listItems);
+  list.scrollTo(0, localStorage.getItem('search-scroll'));
 }
