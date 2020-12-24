@@ -14,17 +14,12 @@
     border-radius: 3px;
     transition: 0.3s;
 
-    &:hover {
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    }
-
     &--total &-amount {
       color: $red-prim;
     }
 
     &--dead &-amount {
-      color: $blue-prim;
+      color: $text-grey-c;
     }
 
     &--recovered &-amount {

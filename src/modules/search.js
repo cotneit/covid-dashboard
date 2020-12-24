@@ -8,21 +8,23 @@ function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-export default function showCountries(data, country, type, show, searchTerm = '') {
+export default function showCountries(data, country, type, showType, show, searchTerm = '') {
   const state = new State();
   const listItems = document.createDocumentFragment();
+  const location = document.querySelector('.location');
 
   list.innerHTML = '';
 
   data
     .filter((item) => item.country.toLowerCase().includes(searchTerm.toLowerCase()))
-    .forEach((obj, index) => {
+    .forEach((obj) => {
       const li = document.createElement('li');
       const countryFlag = document.createElement('img');
       const countryName = document.createElement('h4');
       const countryInfo = document.createElement('div');
       const countryPopulation = document.createElement('h2');
       const countryPopulationText = document.createElement('h5');
+      const index = data.map((e) => e.country).indexOf(obj.country);
 
       li.classList.add('country-item');
       countryInfo.classList.add('country-item__info');
@@ -49,13 +51,21 @@ export default function showCountries(data, country, type, show, searchTerm = ''
       if (obj.country === country) li.style.background = '#1d1b1b';
 
       li.addEventListener('click', () => {
+        location.selectedIndex = 0;
+        localStorage.setItem('scroll-index', index);
         localStorage.setItem('search-scroll', list.scrollTop);
-        localStorage.setItem('countries-scroll', 36.4 * index);
-        state.update(data, obj.country, type, show);
+        localStorage.setItem('countries-scroll', 'false');
+        state.update(data, obj.country, type, showType, show);
       });
 
       listItems.appendChild(li);
     });
+
   list.appendChild(listItems);
-  list.scrollTo(0, localStorage.getItem('search-scroll'));
+
+  if (localStorage.getItem('search-scroll') === 'false') {
+    list.childNodes[localStorage.getItem('scroll-index')].scrollIntoView();
+  } else {
+    list.scrollTo(0, localStorage.getItem('search-scroll'));
+  }
 }

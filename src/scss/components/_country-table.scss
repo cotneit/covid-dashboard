@@ -23,7 +23,7 @@
 
     &:hover {
       cursor: pointer;
-      background: #1d1b1b;
+      background: $red-dark;
     }
 
     &--header {
@@ -42,7 +42,7 @@
     color: $white;
     letter-spacing: 0.05em;
     cursor: pointer;
-    background: #517d67;
+    background: $text-grey-a;
 
     &::after {
       display: inline-block;

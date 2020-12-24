@@ -11,7 +11,7 @@ import './scss/main.scss';
 let globalData;
 
 function init(data) {
-  const state = new State(data, 'Belarus', 'All', 'Absolute');
+  const state = new State(data, 'Belarus', 'All', 'cases', 'Absolute');
 
   getData('World').then((res) => {
     globalData = res;
@@ -23,62 +23,57 @@ function init(data) {
   location.selectedIndex = 0;
 
   localStorage.setItem('map-zoom', 6);
-  localStorage.setItem('search-scroll', 69.3 * index);
-  localStorage.setItem('countries-scroll', 36.4 * index);
+  localStorage.setItem('countries-scroll', 'false');
+  localStorage.setItem('search-scroll', 'false');
+  localStorage.setItem('scroll-index', index);
 
-  state.subscribe('countriesTable', (json, country, type, show) => {
-    countriesTable(json, country, type, show);
+  state.subscribe('countriesTable', (json, country, type, showType, show) => {
+    countriesTable(json, country, type, showType, show);
   });
 
-  state.subscribe('countryInfo', (json, country, type, show) => {
+  state.subscribe('countryInfo', (json, country, type, showType, show) => {
     showCountryInfo(json, country, type, show);
   });
 
-  state.subscribe('map', (json, country, type, show) => {
-    map(json, country, type, 'cases', show);
+  state.subscribe('map', (json, country, type, showType, show) => {
+    map(json, country, type, showType, show);
   });
 
-  state.subscribe('newChart', (json, country, type, show) => {
-    newChart(json, country, type, 'cases', show);
+  state.subscribe('newChart', (json, country, type, showType, show) => {
+    newChart(json, country, type, showType, show);
   });
 
-  state.subscribe('showCountries', (json, country, type, show) => {
+  state.subscribe('showCountries', (json, country, type, showType, show) => {
     if (document.querySelector('#search').value !== '') {
-      showCountries(json, country, type, show, document.querySelector('#search').value);
+      showCountries(json, country, type, showType, show, document.querySelector('#search').value);
     } else {
-      showCountries(json, country, type, show);
+      showCountries(json, country, type, showType, show);
     }
   });
 
-  state.subscribe('events', (json, country, type, show) => {
+  state.subscribe('events', (json, country, type, showType, show) => {
     document.querySelector('#map-cases').onclick = function () {
-      map(json, country, type, 'cases', show);
-      newChart(json, country, type, 'cases', show);
+      state.update(data, country, type, 'cases', show);
     };
 
     document.querySelector('#map-recovered').onclick = function () {
-      map(json, country, type, 'recovered', show);
-      newChart(json, country, type, 'recovered', show);
+      state.update(data, country, type, 'recovered', show);
     };
 
     document.querySelector('#map-deaths').onclick = function () {
-      map(json, country, type, 'deaths', show);
-      newChart(json, country, type, 'deaths', show);
+      state.update(data, country, type, 'deaths', show);
     };
 
     document.querySelector('#chart-cases').onclick = function () {
-      map(json, country, type, 'cases', show);
-      newChart(json, country, type, 'cases', show);
+      state.update(data, country, type, 'cases', show);
     };
 
     document.querySelector('#chart-recovered').onclick = function () {
-      map(json, country, type, 'recovered', show);
-      newChart(json, country, type, 'recovered', show);
+      state.update(data, country, type, 'recovered', show);
     };
 
     document.querySelector('#chart-deaths').onclick = function () {
-      map(json, country, type, 'deaths', show);
-      newChart(json, country, type, 'deaths', show);
+      state.update(data, country, type, 'deaths', show);
     };
 
     document.querySelector('#search').oninput = function (e) {
@@ -90,17 +85,17 @@ function init(data) {
       switch (e.target.value) {
         case '1':
           time.selectedIndex = 0;
-          state.update(data, country, 'All', show);
+          state.update(data, country, 'All', showType, show);
           worldInfo(globalData);
           break;
         case '2':
           time.selectedIndex = 1;
-          state.update(data, country, 'Last', show);
+          state.update(data, country, 'Last', showType, show);
           worldInfo(globalData);
           break;
         default:
           time.selectedIndex = 0;
-          state.update(data, country, 'All', show);
+          state.update(data, country, 'All', showType, show);
           worldInfo(globalData);
           break;
       }
@@ -111,17 +106,17 @@ function init(data) {
       switch (e.target.value) {
         case '1':
           values.selectedIndex = 0;
-          state.update(data, country, type, 'Absolute');
+          state.update(data, country, type, showType, 'Absolute');
           worldInfo(globalData);
           break;
         case '2':
           values.selectedIndex = 1;
-          state.update(data, country, type, 'One hund');
+          state.update(data, country, type, showType, 'One hund');
           worldInfo(globalData);
           break;
         default:
           values.selectedIndex = 0;
-          state.update(data, country, type, 'Absolute');
+          state.update(data, country, type, showType, 'Absolute');
           worldInfo(globalData);
           break;
       }
@@ -132,17 +127,17 @@ function init(data) {
       switch (e.target.value) {
         case '1':
           time.selectedIndex = 0;
-          state.update(data, country, 'All', show);
+          state.update(data, country, 'All', showType, show);
           worldInfo(globalData);
           break;
         case '2':
           time.selectedIndex = 1;
-          state.update(data, country, 'Last', show);
+          state.update(data, country, 'Last', showType, show);
           worldInfo(globalData);
           break;
         default:
           time.selectedIndex = 0;
-          state.update(data, country, 'All', show);
+          state.update(data, country, 'All', showType, show);
           worldInfo(globalData);
           break;
       }
@@ -153,24 +148,24 @@ function init(data) {
       switch (e.target.value) {
         case '1':
           values.selectedIndex = 0;
-          state.update(data, country, type, 'Absolute');
+          state.update(data, country, type, showType, 'Absolute');
           worldInfo(globalData);
           break;
         case '2':
           values.selectedIndex = 1;
-          state.update(data, country, type, 'One hund');
+          state.update(data, country, type, showType, 'One hund');
           worldInfo(globalData);
           break;
         default:
           values.selectedIndex = 0;
-          state.update(data, country, type, 'Absolute');
+          state.update(data, country, type, showType, 'Absolute');
           worldInfo(globalData);
           break;
       }
     };
 
     location.onchange = function () {
-      state.update(data, country, type, show);
+      state.updateWithout('map', data, country, type, showType, show);
     };
   });
 }

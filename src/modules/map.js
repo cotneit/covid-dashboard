@@ -22,11 +22,12 @@ function getSize(d) {
 
 export default function map(data, oneCountry, type, showType, show) {
   const state = new State();
-
+  console.log(show);
   let casesString;
   const localZoom = localStorage.getItem('map-zoom');
   const oneCountryInfo = data.find((obj) => obj.country === oneCountry).countryInfo;
   const latlong = [oneCountryInfo.lat, oneCountryInfo.long];
+  const location = document.querySelector('.location');
 
   const geoJson = {
     type: 'FeatureCollection',
@@ -133,10 +134,13 @@ export default function map(data, oneCountry, type, showType, show) {
             }),
           }).on('click', () => {
             const index = data.map((e) => e.country).indexOf(feature.properties.country);
-            localStorage.setItem('search-scroll', 69.3 * index);
-            localStorage.setItem('countries-scroll', 36.4 * index);
+            location.selectedIndex = 0;
+
+            localStorage.setItem('scroll-index', index);
+            localStorage.setItem('countries-scroll', 'false');
+            localStorage.setItem('search-scroll', 'false');
             localStorage.setItem('map-zoom', maps.getZoom());
-            state.updateWithout('map', data, feature.properties.country, type);
+            state.updateWithout('map', data, feature.properties.country, type, showType, show);
           });
           return marker;
         }
@@ -149,10 +153,13 @@ export default function map(data, oneCountry, type, showType, show) {
           }),
         }).on('click', () => {
           const index = data.map((e) => e.country).indexOf(feature.properties.country);
-          localStorage.setItem('search-scroll', 69.3 * index);
-          localStorage.setItem('countries-scroll', 36.4 * index);
+          location.selectedIndex = 0;
+
+          localStorage.setItem('scroll-index', index);
+          localStorage.setItem('search-scroll', 'false');
+          localStorage.setItem('countries-scroll', 'false');
           localStorage.setItem('map-zoom', maps.getZoom());
-          state.updateWithout('map', data, feature.properties.country, type, show);
+          state.updateWithout('map', data, feature.properties.country, type, showType, show);
         });
       }
       return 0;

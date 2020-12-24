@@ -22,18 +22,18 @@ export default function worldInfo(data) {
         card.classList.add('world-data__card--total');
         break;
       case 2:
-        if (type === 'All') text = (show === 'Absolute') ? data.deaths : Math.round((data.deaths / data.population) * 100000);
-        else text = (show === 'Absolute') ? data.todayDeaths : Math.round((data.todayDeaths / data.population) * 100000);
-
-        card.innerHTML = `<h3 class="world-data__card-amount">${text}</h3><p>Total deaths</p>`;
-        card.classList.add('world-data__card--dead');
-        break;
-      case 3:
         if (type === 'All') text = (show === 'Absolute') ? data.recovered : Math.round((data.recovered / data.population) * 100000);
         else text = (show === 'Absolute') ? data.todayRecovered : Math.round((data.todayRecovered / data.population) * 100000);
 
         card.innerHTML = `<h3 class="world-data__card-amount">${text}</h3><p>Total recovered</p>`;
         card.classList.add('world-data__card--recovered');
+        break;
+      case 3:
+        if (type === 'All') text = (show === 'Absolute') ? data.deaths : Math.round((data.deaths / data.population) * 100000);
+        else text = (show === 'Absolute') ? data.todayDeaths : Math.round((data.todayDeaths / data.population) * 100000);
+
+        card.innerHTML = `<h3 class="world-data__card-amount">${text}</h3><p>Total deaths</p>`;
+        card.classList.add('world-data__card--dead');
         break;
       default:
         if (type === 'All') text = (show === 'Absolute') ? data.cases : Math.round((data.cases / data.population) * 100000);
