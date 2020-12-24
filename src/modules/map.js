@@ -22,7 +22,7 @@ function getSize(d) {
 
 export default function map(data, oneCountry, type, showType, show) {
   const state = new State();
-  console.log(show);
+
   let casesString;
   const localZoom = localStorage.getItem('map-zoom');
   const oneCountryInfo = data.find((obj) => obj.country === oneCountry).countryInfo;
