@@ -77,7 +77,7 @@ function init(data) {
     };
 
     document.querySelector('#search').oninput = function (e) {
-      showCountries(json, country, type, show, e.target.value);
+      showCountries(json, country, type, showType, show, e.target.value);
     };
 
     document.querySelector('#time').onchange = function (e) {
