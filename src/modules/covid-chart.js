@@ -11,10 +11,10 @@ import { indexPerPopulation, getChartColors, increasePerDay } from './secondary-
 function configChart() {
   Chart.defaults.global.defaultFontFamily = 'Roboto';
   Chart.defaults.global.defaultFontColor = '#eeeeee';
-  Chart.Legend.prototype.afterFit = function () {
+  Chart.Legend.prototype.afterFit = function afterFit() {
     this.height += 0;
   };
-  Chart.Title.prototype.afterFit = function () {
+  Chart.Title.prototype.afterFit = function afterFit() {
     this.height -= 38;
   };
 }
