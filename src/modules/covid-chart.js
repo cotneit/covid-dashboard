@@ -193,6 +193,7 @@ export default async function newChart(json, country, typeStatus, showType, show
     if (selectedLocation === 'Global') {
       globalData = await getData('World');
     }
+
     const choice = (selectedLocation === 'Global') ? selectedLocation : country;
     const { population } = (selectedLocation === 'Global') ? globalData : json.find((obj) => obj.country === country);
     const countryAPI = (selectedLocation === 'Global') ? 'all' : country;

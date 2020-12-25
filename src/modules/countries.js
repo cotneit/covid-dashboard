@@ -26,8 +26,9 @@ function sortTableByColumn(table, column, asc = true) {
   table.querySelector(`th:nth-child(${column + 1})`).classList.toggle('th-sort-desc', !asc);
 }
 
-export default function countriesTable(data, country, type, show) {
+export default function countriesTable(data, country, type, showType, show) {
   const state = new State();
+  const location = document.querySelector('.location');
 
   document.querySelector('#country').innerHTML = '';
   const divTable = document.createElement('div');
@@ -47,7 +48,7 @@ export default function countriesTable(data, country, type, show) {
     tr.className = 'country-table__row';
 
     if (elem.country === country) {
-      tr.style.background = 'red';
+      tr.style.background = '#902039';
     }
 
     if (type === 'All') cases = (show === 'Absolute') ? elem.cases : Math.round((elem.cases / elem.population) * 100000);
@@ -61,9 +62,11 @@ export default function countriesTable(data, country, type, show) {
 
     tr.innerHTML = `<tr><td>${elem.country}</td><td>${cases}</td><td>${deaths}</td><td>${recovered}</td></tr>`;
     tr.addEventListener('click', () => {
-      localStorage.setItem('search-scroll', 69.3 * index);
+      location.selectedIndex = 0;
+      localStorage.setItem('scroll-index', index);
+      localStorage.setItem('search-scroll', 'false');
       localStorage.setItem('countries-scroll', divTable.scrollTop);
-      state.update(data, elem.country, type, show);
+      state.update(data, elem.country, type, showType, show);
     });
     tbody.appendChild(tr);
   });
@@ -74,7 +77,13 @@ export default function countriesTable(data, country, type, show) {
 
   document.querySelector('#country').appendChild(divTable);
 
-  divTable.scrollTo(0, localStorage.getItem('countries-scroll'));
+  if (localStorage.getItem('countries-scroll') === 'false') {
+    const index = localStorage.getItem('scroll-index');
+    if (index > 0) tbody.childNodes[index - 1].scrollIntoView();
+    else divTable.scrollTo(0, 0);
+  } else {
+    divTable.scrollTo(0, localStorage.getItem('countries-scroll'));
+  }
 
   document.querySelectorAll('.country_sort th').forEach((headerCell) => {
     headerCell.addEventListener('click', () => {
