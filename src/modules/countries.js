@@ -85,14 +85,6 @@ export default function countriesTable(data, country, type, showType, show) {
 
   document.querySelector('#country').appendChild(divTable);
 
-  if (localStorage.getItem('countries-scroll') === 'false') {
-    const index = localStorage.getItem('scroll-index');
-    if (index > 0) tbody.childNodes[index - 1].scrollIntoView();
-    else divTable.scrollTo(0, 0);
-  } else {
-    divTable.scrollTo(0, localStorage.getItem('countries-scroll'));
-  }
-
   document.querySelectorAll('.country_sort th').forEach((headerCell) => {
     headerCell.addEventListener('click', () => {
       const tableElement = headerCell.parentElement.parentElement.parentElement;
@@ -103,5 +95,15 @@ export default function countriesTable(data, country, type, showType, show) {
     });
   });
 
+  // Sort table by cases
   sortTableByColumn(table, 1, false);
+
+  // Scroll to the selected country
+  const rows = [...tbody.children];
+  const selectedIndex = rows.findIndex((row) => row.children[0].textContent === country);
+  if (selectedIndex > 0) {
+    rows[selectedIndex - 1].scrollIntoView();
+  } else {
+    divTable.scrollTo(0, 0);
+  }
 }
