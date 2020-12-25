@@ -1,4 +1,5 @@
 import State from './state';
+import { getNumberWithCommas } from './secondary-functions';
 
 export default function worldInfo(data) {
   const state = new State();
@@ -17,6 +18,7 @@ export default function worldInfo(data) {
       case 1:
         if (type === 'All') text = (show === 'Absolute') ? data.cases : Math.round((data.cases / data.population) * 100000);
         else text = (show === 'Absolute') ? data.todayCases : Math.round((data.todayCases / data.population) * 100000);
+        text = getNumberWithCommas(text);
 
         card.innerHTML = `<h3 class="world-data__card-amount">${text}</h3><p>Total cases</p>`;
         card.classList.add('world-data__card--total');
@@ -24,6 +26,7 @@ export default function worldInfo(data) {
       case 2:
         if (type === 'All') text = (show === 'Absolute') ? data.recovered : Math.round((data.recovered / data.population) * 100000);
         else text = (show === 'Absolute') ? data.todayRecovered : Math.round((data.todayRecovered / data.population) * 100000);
+        text = getNumberWithCommas(text);
 
         card.innerHTML = `<h3 class="world-data__card-amount">${text}</h3><p>Total recovered</p>`;
         card.classList.add('world-data__card--recovered');
@@ -31,6 +34,7 @@ export default function worldInfo(data) {
       case 3:
         if (type === 'All') text = (show === 'Absolute') ? data.deaths : Math.round((data.deaths / data.population) * 100000);
         else text = (show === 'Absolute') ? data.todayDeaths : Math.round((data.todayDeaths / data.population) * 100000);
+        text = getNumberWithCommas(text);
 
         card.innerHTML = `<h3 class="world-data__card-amount">${text}</h3><p>Total deaths</p>`;
         card.classList.add('world-data__card--dead');
@@ -38,6 +42,7 @@ export default function worldInfo(data) {
       default:
         if (type === 'All') text = (show === 'Absolute') ? data.cases : Math.round((data.cases / data.population) * 100000);
         else text = (show === 'Absolute') ? data.todayCases : Math.round((data.todayCases / data.population) * 100000);
+        text = getNumberWithCommas(text);
 
         card.innerHTML = `<h3>${text}</h3><p>Total cases</p>`;
         break;

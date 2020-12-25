@@ -49,4 +49,13 @@ function getChartColors(status, type) {
   return '#eeeeee';
 }
 
-export { indexPerPopulation, getChartColors, increasePerDay };
+function getNumberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+export {
+  indexPerPopulation,
+  getChartColors,
+  increasePerDay,
+  getNumberWithCommas,
+};
