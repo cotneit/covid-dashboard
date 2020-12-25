@@ -17,10 +17,11 @@
   }
 
   &__info {
+    margin-top: 5px;
     font-family: $ff-prim;
+    font-size: 0.75rem;
     font-weight: 400;
     color: $text-grey-b;
-    font-size: 12px;
   }
 
   &__last-updated {

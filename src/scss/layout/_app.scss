@@ -1,7 +1,7 @@
 .app {
   box-sizing: border-box;
   display: grid;
-  grid-template-rows: 1fr 4fr 2fr;
+  grid-template-rows: minmax(70px, auto) 4fr 2fr;
   grid-template-columns: 1fr 2fr 1fr;
   gap: 5px;
   min-height: 100vh;
@@ -16,14 +16,14 @@
   }
 
   @media screen and (max-width: 1023px) {
-    grid-template-rows: 100px 100vh 80vh auto;
+    grid-template-rows: minmax(60px, auto) 100vh 80vh auto;
     grid-template-columns: 1fr 1fr;
     gap: 5px;
     max-height: none;
   }
 
   @media screen and (max-width: 679px) {
-    grid-template-rows: 100px 100vh 60vh 80vh auto;
+    grid-template-rows: minmax(60px, auto) 100vh 60vh 80vh auto;
   }
 
   &__header {
