@@ -52,35 +52,35 @@ function init(data) {
   });
 
   state.subscribe('events', (json, country, type, showType, show) => {
-    document.querySelector('#map-cases').onclick = function () {
+    document.querySelector('#map-cases').onclick = () => {
       state.update(data, country, type, 'cases', show);
     };
 
-    document.querySelector('#map-recovered').onclick = function () {
+    document.querySelector('#map-recovered').onclick = () => {
       state.update(data, country, type, 'recovered', show);
     };
 
-    document.querySelector('#map-deaths').onclick = function () {
+    document.querySelector('#map-deaths').onclick = () => {
       state.update(data, country, type, 'deaths', show);
     };
 
-    document.querySelector('#chart-cases').onclick = function () {
+    document.querySelector('#chart-cases').onclick = () => {
       state.update(data, country, type, 'cases', show);
     };
 
-    document.querySelector('#chart-recovered').onclick = function () {
+    document.querySelector('#chart-recovered').onclick = () => {
       state.update(data, country, type, 'recovered', show);
     };
 
-    document.querySelector('#chart-deaths').onclick = function () {
+    document.querySelector('#chart-deaths').onclick = () => {
       state.update(data, country, type, 'deaths', show);
     };
 
-    document.querySelector('#search').oninput = function (e) {
+    document.querySelector('#search').oninput = (e) => {
       showCountries(json, country, type, showType, show, e.target.value);
     };
 
-    document.querySelector('#time').onchange = function (e) {
+    document.querySelector('#time').onchange = (e) => {
       const time = document.querySelector('#chart-time');
       switch (e.target.value) {
         case '1':
@@ -101,7 +101,7 @@ function init(data) {
       }
     };
 
-    document.querySelector('#values').onchange = function (e) {
+    document.querySelector('#values').onchange = (e) => {
       const values = document.querySelector('#chart-values');
       switch (e.target.value) {
         case '1':
@@ -122,7 +122,7 @@ function init(data) {
       }
     };
 
-    document.querySelector('#chart-time').onchange = function (e) {
+    document.querySelector('#chart-time').onchange = (e) => {
       const time = document.querySelector('#time');
       switch (e.target.value) {
         case '1':
@@ -143,7 +143,7 @@ function init(data) {
       }
     };
 
-    document.querySelector('#chart-values').onchange = function (e) {
+    document.querySelector('#chart-values').onchange = (e) => {
       const values = document.querySelector('#values');
       switch (e.target.value) {
         case '1':
@@ -164,7 +164,7 @@ function init(data) {
       }
     };
 
-    location.onchange = function () {
+    location.onchange = () => {
       state.updateWithout('map', data, country, type, showType, show);
     };
   });

@@ -1,12 +1,9 @@
 import State from './state';
+import { getNumberWithCommas } from './secondary-functions';
 
 // Источник: https://codepen.io/bludce/pen/KOmYyV?editors=0110
 
 const list = document.querySelector('.country-list__inner');
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
 
 export default function showCountries(data, country, type, showType, show, searchTerm = '') {
   const state = new State();
@@ -35,7 +32,7 @@ export default function showCountries(data, country, type, showType, show, searc
       countryName.innerText = obj.country;
       countryName.classList.add('country-item__name');
 
-      countryPopulation.innerText = numberWithCommas(obj.population);
+      countryPopulation.innerText = getNumberWithCommas(obj.population);
       countryPopulation.classList.add('country-item__population');
 
       countryPopulationText.innerText = 'Population';

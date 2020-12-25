@@ -1,4 +1,5 @@
 import State from './state';
+import { getNumberWithCommas } from './secondary-functions';
 
 // Источник: https://codepen.io/dcode-software/pen/zYGOrzK
 
@@ -7,10 +8,10 @@ function sortTableByColumn(table, column, asc = true) {
   const tBody = table.tBodies[0];
   const rows = Array.from(tBody.querySelectorAll('tr'));
 
-  const collator = new Intl.Collator(['en', 'ru'], { numeric: true });
+  const collator = new Intl.Collator(['en'], { numeric: true });
   const comparator = (index, order) => (a, b) => order * collator.compare(
-    a.children[index].innerHTML,
-    b.children[index].innerHTML,
+    a.children[index].innerHTML.replaceAll(',', ''),
+    b.children[index].innerHTML.replaceAll(',', ''),
   );
 
   const sortedRows = rows.sort(comparator(column, dirModifier));
@@ -42,8 +43,9 @@ export default function countriesTable(data, country, type, showType, show) {
   const tbody = document.createElement('tbody');
 
   data.forEach((elem, index) => {
-    let cases; let deaths; let
-      recovered;
+    let cases;
+    let deaths;
+    let recovered;
     const tr = document.createElement('tr');
     tr.className = 'country-table__row';
 
@@ -60,7 +62,13 @@ export default function countriesTable(data, country, type, showType, show) {
     if (type === 'All') recovered = (show === 'Absolute') ? elem.recovered : Math.round((elem.recovered / elem.population) * 100000);
     else recovered = (show === 'Absolute') ? elem.todayRecovered : Math.round((elem.todayRecovered / elem.population) * 100000);
 
-    tr.innerHTML = `<tr><td>${elem.country}</td><td>${cases}</td><td>${deaths}</td><td>${recovered}</td></tr>`;
+    tr.innerHTML = `
+    <tr>
+      <td>${elem.country}</td>
+      <td>${getNumberWithCommas(cases)}</td>
+      <td>${getNumberWithCommas(deaths)}</td>
+      <td>${getNumberWithCommas(recovered)}</td>
+    </tr>`;
     tr.addEventListener('click', () => {
       location.selectedIndex = 0;
       localStorage.setItem('scroll-index', index);
@@ -77,14 +85,6 @@ export default function countriesTable(data, country, type, showType, show) {
 
   document.querySelector('#country').appendChild(divTable);
 
-  if (localStorage.getItem('countries-scroll') === 'false') {
-    const index = localStorage.getItem('scroll-index');
-    if (index > 0) tbody.childNodes[index - 1].scrollIntoView();
-    else divTable.scrollTo(0, 0);
-  } else {
-    divTable.scrollTo(0, localStorage.getItem('countries-scroll'));
-  }
-
   document.querySelectorAll('.country_sort th').forEach((headerCell) => {
     headerCell.addEventListener('click', () => {
       const tableElement = headerCell.parentElement.parentElement.parentElement;
@@ -94,4 +94,16 @@ export default function countriesTable(data, country, type, showType, show) {
       sortTableByColumn(tableElement, headIndex, !currentIsAscending);
     });
   });
+
+  // Sort table by cases
+  sortTableByColumn(table, 1, false);
+
+  // Scroll to the selected country
+  const rows = [...tbody.children];
+  const selectedIndex = rows.findIndex((row) => row.children[0].textContent === country);
+  if (selectedIndex > 0) {
+    rows[selectedIndex - 1].scrollIntoView();
+  } else {
+    divTable.scrollTo(0, 0);
+  }
 }
