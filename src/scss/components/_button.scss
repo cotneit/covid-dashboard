@@ -1,0 +1,15 @@
+.button {
+  box-sizing: border-box;
+  padding: 5px 10px;
+  font-family: $ff-prim;
+  font-size: 0.9rem;
+  color: $white;
+  background: $grey-dark;
+  border: 1px solid $grey-dark;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+    background: $grey-light;
+  }
+}

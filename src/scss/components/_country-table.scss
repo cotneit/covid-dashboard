@@ -1,0 +1,75 @@
+.country-table {
+  @include scrollbar();
+
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  font-family: $ff-prim;
+  background: $grey-dark-v2;
+
+  &__inner {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  &__row {
+    line-height: 2rem;
+    color: $white;
+    text-align: center;
+    text-transform: capitalize;
+    border-bottom: 1px solid #aba3a31c;
+
+    &:hover {
+      cursor: pointer;
+      background: $red-dark;
+    }
+
+    &--header {
+      border-bottom: none;
+    }
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 50px;
+    font-size: 1rem;
+    font-weight: lighter;
+    line-height: 2rem;
+    color: $white;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    background: $grey-light;
+
+    &::after {
+      display: inline-block;
+      width: 1px;
+      height: 1px;
+      margin-left: 2px;
+      content: '';
+      transform: translateY(100%);
+    }
+  }
+
+  td {
+    filter: drop-shadow(#000 1px 1px 1px);
+
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) {
+      padding-left: 10px;
+      text-align: left;
+    }
+  }
+
+  .th-sort-asc::after {
+    content: '\25b4';
+  }
+
+  .th-sort-desc::after {
+    content: '\25be';
+  }
+}

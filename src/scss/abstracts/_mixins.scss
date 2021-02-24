@@ -1,0 +1,35 @@
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+@mixin section() {
+  background-color: $grey-light;
+}
+
+@mixin scrollbar() {
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $grey-dark-v2;
+    border: 2px solid $grey-dark;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $grey-dark;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: $grey-dark;
+  }
+}

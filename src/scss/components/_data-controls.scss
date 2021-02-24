@@ -1,0 +1,37 @@
+.data-controls {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: -2px;
+
+  &__block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2px;
+
+    > *:not(:last-child) {
+      margin-right: 2px;
+    }
+
+    &:not(:last-of-type) {
+      margin-right: 2px;
+    }
+  }
+
+  select {
+    padding: 5px 10px;
+    font-family: $ff-prim;
+    font-size: 0.9rem;
+    color: $white;
+    background-color: $grey-dark;
+    border: 1px solid $grey-dark;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+      background: $grey-light;
+    }
+  }
+}

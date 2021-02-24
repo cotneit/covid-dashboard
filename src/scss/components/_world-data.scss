@@ -1,0 +1,29 @@
+.world-data {
+  display: flex;
+  justify-content: space-between;
+  font-family: $ff-prim;
+  color: $white;
+
+  &__card {
+    box-sizing: border-box;
+    width: 32.5%;
+    padding: 5px 10px;
+    font-weight: 500;
+    text-align: center;
+    background-color: $grey-dark-v2;
+    border-radius: 3px;
+    transition: 0.3s;
+
+    &--total &-amount {
+      color: $red-prim;
+    }
+
+    &--dead &-amount {
+      color: $text-grey-c;
+    }
+
+    &--recovered &-amount {
+      color: $green-prim;
+    }
+  }
+}

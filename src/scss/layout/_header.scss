@@ -1,0 +1,30 @@
+.header {
+  @include section;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
+  padding: 5px;
+
+  &__heading {
+    margin: 0;
+    font-family: $ff-prim;
+    font-weight: 500;
+    color: $white;
+  }
+
+  &__info {
+    margin-top: 5px;
+    font-family: $ff-prim;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: $text-grey-b;
+  }
+
+  &__last-updated {
+    margin: 0;
+  }
+}
